@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Aqsu • For My Favorite Human 🌸</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Three.js for 3D Dreamy Scene -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- GSAP for Smooth Fluid Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- Canvas Confetti for Celebration Climax -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,400;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-cream: #fff9f4;
+            --blush-soft: #ffeef2;
+            --rose-primary: #f06d94;
+            --rose-deep: #d94f7e;
+            --pink-glow: rgba(240, 109, 148, 0.35);
+            --gold-soft: #d9a441;
+            --gold-light: #f3d9a4;
+            --plum-text: #4a2131;
+            --card-white: rgba(255, 255, 255, 0.72);
+            --card-border: rgba(224, 155, 178, 0.45);
+        }
+
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fdf2f4;
+            color: var(--plum-text);
+            touch-action: manipulation;
+        }
+
+        .font-serif-luxury {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .font-editorial {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* Dreamy Cinematic Birthday Background - Seamless Full Viewport Coverage */
+        #aurora-background {
+            position: fixed;
+            top: -4%;
+            left: -4%;
+            width: 108vw;
+            height: 108vh;
+            z-index: 0;
+            background-image: url('./bg-dreamy-birthday.png');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            will-change: transform;
+            pointer-events: none;
+            animation: bgBreathe 24s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgBreathe {
+            0% { transform: scale(1.01) translate(0, 0); }
+            50% { transform: scale(1.04) translate(4px, -3px); }
+            100% { transform: scale(1.01) translate(0, 0); }
+        }
+
+        /* Atmospheric Light & Vignette Overlay */
+        #ambient-light-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 50% 35%, rgba(255, 245, 235, 0.22) 0%, transparent 65%),
+                radial-gradient(ellipse at 50% 100%, rgba(255, 230, 240, 0.25) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(230, 160, 185, 0.12) 100%);
+        }
+
+        /* Top Hanging Fairy Lights & Garland - Seamless Soft Blend */
+        .ambient-fairy-lights {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 90px;
+            z-index: 3;
+            pointer-events: none;
+            background: radial-gradient(circle at 8% 0%, rgba(255,235,190,0.6) 0%, transparent 22%),
+                        radial-gradient(circle at 22% 0%, rgba(255,220,180,0.55) 0%, transparent 20%),
+                        radial-gradient(circle at 38% 0%, rgba(255,245,210,0.65) 0%, transparent 24%),
+                        radial-gradient(circle at 62% 0%, rgba(255,245,210,0.65) 0%, transparent 24%),
+                        radial-gradient(circle at 78% 0%, rgba(255,220,180,0.55) 0%, transparent 20%),
+                        radial-gradient(circle at 92% 0%, rgba(255,235,190,0.6) 0%, transparent 22%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+        }
+
+        /* Soft grain overlay for premium texture */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+            opacity: 0.25;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+
+        /* Canvas 3D background */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Main App Flex Centering (Always Dead Center) */
+        #app {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        #step-container {
+            width: 100%;
+            max-width: 780px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1400px;
+            pointer-events: auto;
+        }
+
+        /* Modern Elegant Blush-Pink Frosted 3D Cards */
+        .step {
+            display: none;
+            width: 100%;
+            margin: 0 auto;
+            background: linear-gradient(150deg, rgba(246, 221, 227, 0.94) 0%, rgba(243, 212, 220, 0.92) 50%, rgba(239, 200, 211, 0.90) 100%);
+            backdrop-filter: blur(28px) saturate(180%);
+            -webkit-backdrop-filter: blur(28px) saturate(180%);
+            border: 1.5px solid rgba(226, 160, 180, 0.55);
+            border-radius: 2.25rem;
+            opacity: 0;
+            pointer-events: none;
+            box-shadow:
+                0 32px 75px -18px rgba(185, 60, 105, 0.26),
+                0 16px 36px -12px rgba(217, 79, 126, 0.2),
+                0 0 45px rgba(246, 221, 227, 0.35),
+                inset 0 2px 3px 0 rgba(255, 255, 255, 0.85),
+                inset 0 -2px 6px 0 rgba(200, 80, 120, 0.08);
+            transform-style: preserve-3d;
+            overflow: visible;
+            position: relative;
+        }
+
+        /* Inner clipped layer so internal scrolls clip gracefully */
+        .step-inner {
+            position: relative;
+            border-radius: inherit;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .step.active {
+            display: block;
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Dynamic interactive glare highlight on mouse move */
+        .step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            background: radial-gradient(
+                800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(255, 255, 255, 0.42),
+                transparent 45%
+            );
+            pointer-events: none;
+            z-index: 2;
+            transition: opacity 0.3s ease;
+            opacity: 0.8;
+        }
+
+        /* Subtle animated luminous pink-gold border */
+        .step-border-glow {
+            position: absolute;
+            inset: -1.5px;
+            border-radius: inherit;
+            padding: 1.5px;
+            background: linear-gradient(135deg, rgba(224, 130, 160, 0.6), rgba(243, 217, 164, 0.75), rgba(255, 255, 255, 0.4), rgba(224, 130, 160, 0.5));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: 3;
+            animation: borderShimmer 6s ease infinite;
+            background-size: 300% 300%;
+        }
+
+        @keyframes borderShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Corner luxury accent marks — rose gold */
+        .luxury-corner {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-color: rgba(217, 164, 96, 0.7);
+            pointer-events: none;
+            z-index: 4;
+        }
+        .luxury-corner-tl { top: 14px; left: 14px; border-top: 2px solid; border-left: 2px solid; border-radius: 6px 0 0 0; }
+        .luxury-corner-tr { top: 14px; right: 14px; border-top: 2px solid; border-right: 2px solid; border-radius: 0 6px 0 0; }
+        .luxury-corner-bl { bottom: 14px; left: 14px; border-bottom: 2px solid; border-left: 2px solid; border-radius: 0 0 0 6px; }
+        .luxury-corner-br { bottom: 14px; right: 14px; border-bottom: 2px solid; border-right: 2px solid; border-radius: 0 0 6px 0; }
+
+        /* Card Ribbon Bow (Top Right) & Flower Bouquet (Bottom Left) */
+        .card-bow-tr {
+            position: absolute;
+            top: -16px;
+            right: -12px;
+            font-size: 2.3rem;
+            z-index: 7;
+            filter: drop-shadow(0 4px 10px rgba(217, 79, 126, 0.35));
+            transform: rotate(14deg);
+            pointer-events: none;
+            transition: transform 0.4s ease;
+        }
+        .card-bouquet-bl {
+            position: absolute;
+            bottom: -32px;
+            left: -36px;
+            width: 160px;
+            max-width: 175px;
+            height: auto;
+            object-fit: contain;
+            z-index: 7;
+            filter: drop-shadow(0 8px 20px rgba(180, 50, 95, 0.28)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.06));
+            pointer-events: none;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        @media (max-width: 768px) {
+            .card-bouquet-bl {
+                width: 130px;
+                bottom: -25px;
+                left: -25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card-bouquet-bl {
+                width: 95px;
+                bottom: -18px;
+                left: -18px;
+            }
+        }
+
+        .step:hover .card-bow-tr {
+            transform: rotate(18deg) scale(1.08);
+        }
+        .step:hover .card-bouquet-bl {
+            transform: scale(1.05) rotate(1.5deg);
+        }
+
+        /* Ornate Filigree Divider */
+        .filigree-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            color: #d9a441;
+            font-size: 0.75rem;
+            opacity: 0.75;
+        }
+        .filigree-line {
+            display: inline-block;
+            width: 45px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(217, 164, 96, 0.6), transparent);
+        }
+
+        /* Typography Gradients - Deepened for High Readability & Luxury */
+        .text-gradient-rose {
+            background: linear-gradient(135deg, #a82855 0%, #d44777 40%, #db658f 70%, #a82855 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 6px rgba(217, 79, 126, 0.18));
+        }
+
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #9e6f1a 0%, #c48b29 45%, #9e6f1a 80%, #7d520e 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 6px rgba(217, 164, 96, 0.2));
+        }
+
+        .text-gradient-dream {
+            background: linear-gradient(120deg, #9b1d4b 0%, #cb3d6e 30%, #a67015 65%, #b82352 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 3px 8px rgba(217, 79, 126, 0.2));
+        }
+
+        /* Luxury Pill Badges — creamy blush */
+        .luxury-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1.15rem;
+            border-radius: 9999px;
+            background: linear-gradient(135deg, rgba(255, 248, 251, 0.98), rgba(252, 232, 239, 0.95));
+            border: 1px solid rgba(225, 130, 160, 0.35);
+            box-shadow: 0 6px 18px rgba(217, 79, 126, 0.15), inset 0 1px 1px rgba(255, 255, 255, 1);
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #a82855;
+        }
+
+        /* Elegant Action Buttons — rose gradient 3D */
+        .btn-luxury {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.65rem;
+            font-weight: 700;
+            font-size: 0.96rem;
+            letter-spacing: 0.03em;
+            padding: 0.88rem 2.4rem;
+            border-radius: 9999px;
+            color: #ffffff !important;
+            background: linear-gradient(135deg, #f27297 0%, #e04a79 48%, #c93463 100%);
+            box-shadow:
+                0 12px 28px -5px rgba(201, 52, 99, 0.52),
+                0 4px 12px rgba(201, 52, 99, 0.25),
+                inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.65),
+                inset 0 -2px 4px 0 rgba(160, 28, 70, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+            overflow: hidden;
+            text-shadow: 0 1px 2px rgba(120, 20, 50, 0.35);
+        }
+
+        .btn-luxury::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            transform: skewX(-25deg);
+            transition: 0.75s ease;
+        }
+
+        .btn-luxury:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow:
+                0 18px 36px -6px rgba(201, 52, 99, 0.65),
+                0 0 30px rgba(240, 109, 148, 0.4),
+                inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.75);
+        }
+
+        .btn-luxury:hover::after {
+            left: 140%;
+        }
+
+        .btn-luxury:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .btn-secondary-luxury {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.6rem;
+            border-radius: 9999px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #5a2a3e;
+            background: rgba(255, 255, 255, 0.82);
+            border: 1px solid rgba(240, 109, 148, 0.24);
+            box-shadow: 0 4px 14px rgba(217, 79, 126, 0.1), inset 0 1px 1px rgba(255,255,255,0.95);
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+        .btn-secondary-luxury:hover {
+            background: #ffffff;
+            color: #b83362;
+            border-color: rgba(240, 109, 148, 0.45);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(217, 79, 126, 0.18);
+        }
+
+        /* Bento Grid & Letter Card Styles */
+        .letter-content-box {
+            background: linear-gradient(180deg, rgba(255, 246, 249, 0.88) 0%, rgba(253, 238, 243, 0.82) 100%);
+            border: 1px solid rgba(235, 175, 195, 0.35);
+            border-radius: 1.25rem;
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.95), 0 4px 16px rgba(217, 79, 126, 0.06);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .custom-letter-scroll {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(240, 109, 148, 0.35) transparent;
+        }
+        .custom-letter-scroll::-webkit-scrollbar {
+            width: 5px;
+        }
+        .custom-letter-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-letter-scroll::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #f68bab, #d94f7e);
+            border-radius: 9999px;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.85rem;
+            text-align: left;
+        }
+
+        @media (max-width: 640px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+                gap: 0.65rem;
+                max-height: 52vh;
+                overflow-y: auto;
+                padding-right: 2px;
+            }
+        }
+
+        .bento-card {
+            position: relative;
+            background: linear-gradient(155deg, rgba(255, 255, 255, 0.94), rgba(255, 243, 247, 0.88));
+            border: 1px solid rgba(240, 109, 148, 0.2);
+            border-radius: 1.25rem;
+            padding: 1rem 1.15rem;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            overflow: hidden;
+            box-shadow:
+                0 8px 20px -8px rgba(217, 79, 126, 0.14),
+                inset 0 1.5px 1px rgba(255, 255, 255, 1);
+        }
+
+        .bento-card:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 14px 28px -8px rgba(217, 79, 126, 0.22),
+                inset 0 1.5px 1px rgba(255, 255, 255, 1);
+            border-color: rgba(240, 109, 148, 0.4);
+        }
+
+        @media (max-width: 640px) {
+            .step {
+                padding: 1.75rem 1.25rem !important;
+                border-radius: 1.5rem;
+            }
+        }
+
+        /* Top Progress Indicator Bar — creamy glass */
+        .progress-pill-container {
+            position: fixed;
+            top: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 40;
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(240, 109, 148, 0.25);
+            padding: 0.5rem 1.4rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 10px 30px rgba(217, 79, 126, 0.18), inset 0 1px 1px rgba(255,255,255,0.9);
+        }
+
+        #step-label {
+            color: #b83362 !important;
+        }
+
+        .step-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 9999px;
+            background: rgba(240, 109, 148, 0.25);
+            transition: all 0.4s ease;
+        }
+
+        .step-dot.active {
+            width: 24px;
+            background: linear-gradient(90deg, #d9a441, #ee5c8d);
+            box-shadow: 0 0 10px rgba(238, 92, 141, 0.6);
+        }
+
+        /* Subtle Creator Signature Credit */
+        .creator-signature {
+            position: fixed;
+            bottom: 1.1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 25;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(107, 69, 83, 0.55);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(240, 109, 148, 0.2);
+            padding: 0.38rem 1.25rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 14px rgba(217, 79, 126, 0.08);
+            white-space: nowrap;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* Audio Control */
+        .audio-toggle-btn {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 40;
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(240, 109, 148, 0.25);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #b83362;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 18px rgba(217, 79, 126, 0.2), inset 0 1px 1px rgba(255,255,255,0.9);
+        }
+        .audio-toggle-btn:hover {
+            background: #ffffff;
+            transform: scale(1.1);
+            border-color: rgba(240, 109, 148, 0.5);
+        }
+
+        /* Pulse glow animation for centerpiece heart */
+        @keyframes heartPulseLuxe {
+            0% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(240, 109, 148, 0.4)); }
+            50% { transform: scale(1.12); filter: drop-shadow(0 0 35px rgba(238, 92, 141, 0.75)); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 15px rgba(240, 109, 148, 0.4)); }
+        }
+        .heart-pulse-luxe {
+            animation: heartPulseLuxe 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            display: inline-block;
+        }
+
+        /* Float animation */
+        @keyframes floatSlow {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(3deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        .float-slow {
+            animation: floatSlow 5s ease-in-out infinite;
+        }
+
+        /* Micro Sparkles */
+        .sparkle-icon {
+            display: inline-block;
+            animation: sparkleSpin 4s linear infinite;
+        }
+        @keyframes sparkleSpin {
+            0% { transform: rotate(0deg) scale(0.9); opacity: 0.7; }
+            50% { transform: rotate(180deg) scale(1.15); opacity: 1; filter: drop-shadow(0 0 6px #e8bd72); }
+            100% { transform: rotate(360deg) scale(0.9); opacity: 0.7; }
+        }
+
+        /* ============ CSS DECOR: BALLOONS, FLOWERS & BOUQUETS ============ */
+        .decor-float {
+            position: fixed;
+            z-index: 5;
+            pointer-events: none;
+            filter: drop-shadow(0 12px 20px rgba(217, 79, 126, 0.2));
+            will-change: transform;
+        }
+
+        /* Pure CSS 3D balloon */
+        .css-balloon {
+            position: relative;
+            width: 54px;
+            height: 66px;
+            background: radial-gradient(circle at 32% 28%, #ffffff 2%, #ffc2d4 22%, #f585ab 62%, #d94f7e 100%);
+            border-radius: 50% 50% 50% 50% / 56% 56% 44% 44%;
+            animation: balloonBob 6s ease-in-out infinite;
+        }
+        .css-balloon::before {
+            content: '';
+            position: absolute;
+            bottom: -7px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            width: 12px;
+            height: 12px;
+            background: inherit;
+            border-radius: 0 0 3px 0;
+        }
+        .css-balloon::after {
+            content: '';
+            position: absolute;
+            top: -99px;
+            left: 50%;
+            width: 1.5px;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, rgba(107, 69, 83, 0.35));
+        }
+        .css-balloon.gold {
+            background: radial-gradient(circle at 32% 28%, #ffffff 2%, #fbe3b5 22%, #e9bd6f 62%, #c98f36 100%);
+        }
+        .css-balloon.cream {
+            background: radial-gradient(circle at 32% 28%, #ffffff 4%, #fff3e0 25%, #ffddba 60%, #f0b98a 100%);
+        }
+        .css-balloon.lavender {
+            background: radial-gradient(circle at 32% 28%, #ffffff 2%, #ecd5ff 22%, #cf9df0 62%, #a86fd1 100%);
+        }
+
+        @keyframes balloonBob {
+            0%, 100% { transform: translateY(0) rotate(-3deg); }
+            50% { transform: translateY(-18px) rotate(3deg); }
+        }
+
+        /* Foil Heart Balloon */
+        .foil-heart {
+            position: fixed;
+            z-index: 5;
+            pointer-events: none;
+            width: 58px;
+            height: 52px;
+            background: radial-gradient(circle at 35% 30%, #ffffff 0%, #fca5bb 30%, #e84b79 70%, #b82352 100%);
+            clip-path: path('M29,10 C29,10 24,0 12,0 C3,0 0,8 0,16 C0,30 20,44 29,52 C38,44 58,30 58,16 C58,8 55,0 46,0 C34,0 29,10 29,10 Z');
+            filter: drop-shadow(0 14px 22px rgba(217, 79, 126, 0.35));
+            animation: floatSlow 5.5s ease-in-out infinite;
+        }
+
+        /* Bouquet cluster decoration */
+        .bouquet {
+            font-size: 2.6rem;
+            letter-spacing: -0.35em;
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+
+        /* Environmental Flower Buckets (Bottom Left & Right) */
+        .ambient-bucket-left {
+            position: fixed;
+            bottom: -5px;
+            left: 2%;
+            z-index: 5;
+            pointer-events: none;
+            font-size: 3.2rem;
+            filter: drop-shadow(0 15px 30px rgba(217, 79, 126, 0.3));
+            animation: floatSlow 7s ease-in-out infinite;
+        }
+        .ambient-bucket-right {
+            position: fixed;
+            bottom: -5px;
+            right: 2%;
+            z-index: 5;
+            pointer-events: none;
+            font-size: 3.2rem;
+            filter: drop-shadow(0 15px 30px rgba(217, 79, 126, 0.3));
+            animation: floatSlow 6.5s ease-in-out infinite reverse;
+        }
+
+        /* Quote card styling */
+        .quote-elegant {
+            position: relative;
+            background: linear-gradient(150deg, rgba(255, 247, 250, 0.92), rgba(253, 238, 243, 0.88));
+            border: 1px solid rgba(235, 175, 195, 0.35);
+            border-radius: 1.4rem;
+            box-shadow: 0 12px 28px -10px rgba(217, 79, 126, 0.16), inset 0 1.5px 1px rgba(255,255,255,0.95);
+        }
+        .quote-elegant::before {
+            content: '\201C';
+            position: absolute;
+            top: -6px;
+            left: 14px;
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            line-height: 1;
+            color: rgba(217, 79, 126, 0.18);
+            pointer-events: none;
+        }
+
+        /* Final wish reveal box */
+        .final-wish-box {
+            background: linear-gradient(120deg, rgba(255, 242, 246, 0.96), rgba(254, 246, 238, 0.96), rgba(255, 242, 246, 0.96));
+            border: 1.5px solid rgba(235, 160, 185, 0.45);
+            box-shadow: 0 14px 32px -10px rgba(217, 79, 126, 0.3), inset 0 1.5px 1px rgba(255,255,255,1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Dreamy Birthday Cinematic Backdrop -->
+    <div id="aurora-background"></div>
+    <div id="ambient-light-overlay"></div>
+    <div class="ambient-fairy-lights"></div>
+
+    <!-- Three.js 3D Floating Scene Canvas -->
+    <div id="canvas-container"></div>
+
+    <!-- Environmental Floating Balloons & Corner Accents -->
+    <div class="decor-float css-balloon" style="top: 14%; left: 4%; animation-delay: 0s;"></div>
+    <div class="decor-float css-balloon gold" style="top: 22%; right: 5%; animation-delay: 1.2s; transform: scale(0.85);"></div>
+    <div class="decor-float css-balloon cream" style="bottom: 20%; left: 5%; animation-delay: 2.2s; transform: scale(0.75);"></div>
+    <div class="decor-float css-balloon lavender" style="bottom: 15%; right: 6%; animation-delay: 0.8s; transform: scale(0.9);"></div>
+    <div class="foil-heart" style="top: 36%; left: 2.5%; animation-delay: 1.5s; transform: scale(0.75) rotate(-8deg);"></div>
+    <div class="foil-heart" style="top: 45%; right: 3%; animation-delay: 2.8s; transform: scale(0.8) rotate(10deg);"></div>
+
+    <!-- Audio Toggle Button & Background Music -->
+    <audio id="bg-music" src="./song.mp3" preload="auto" loop playsinline></audio>
+    <button id="audio-toggle" class="audio-toggle-btn" title="Toggle Music" aria-label="Toggle Music">
+        <svg id="sound-icon-on" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
+        </svg>
+        <svg id="sound-icon-off" class="w-5 h-5 text-gray-400 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15zM17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path>
+        </svg>
+    </button>
+
+    <!-- Top Step Indicator Pill -->
+    <div class="progress-pill-container">
+        <span id="step-label" class="text-xs font-bold tracking-widest uppercase">Chapter 01 / 05</span>
+        <div class="flex items-center gap-1.5">
+            <div id="dot-1" class="step-dot active"></div>
+            <div id="dot-2" class="step-dot"></div>
+            <div id="dot-3" class="step-dot"></div>
+            <div id="dot-4" class="step-dot"></div>
+            <div id="dot-5" class="step-dot"></div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div id="app">
+        <main id="step-container">
+            <!-- ================= STEP 1: The Personal Opening ================= -->
+            <div id="step1" class="step active max-w-lg p-6 md:p-8 text-center">
+                <div class="step-border-glow"></div>
+                <div class="luxury-corner luxury-corner-tl"></div>
+                <div class="luxury-corner luxury-corner-br"></div>
+                <div class="card-bow-tr">🎀</div>
+                <img src="./bucky.png" alt="Bouquet" class="card-bouquet-bl" loading="eager">
+
+                <div class="step-inner p-1 md:p-2">
+                    <div class="anim-child mb-2 mt-1">
+                        <div class="luxury-badge">
+                            <span class="sparkle-icon">✦</span> FOR MY FAVORITE HUMAN ✦
+                        </div>
+                    </div>
+
+                    <div class="anim-child my-3">
+                        <div class="heart-pulse-luxe text-5xl md:text-6xl">💖</div>
+                    </div>
+
+                    <h1 class="anim-child font-serif-luxury text-3xl md:text-4xl lg:text-5xl font-bold text-gradient-dream mb-2 tracking-tight leading-tight">
+                        Happy Birthday, Aqsu.
+                    </h1>
+
+                    <div class="anim-child filigree-divider my-2.5">
+                        <span>✦</span>
+                        <span class="filigree-line"></span>
+                        <span>♡</span>
+                        <span class="filigree-line"></span>
+                        <span>✦</span>
+                    </div>
+
+                    <p class="anim-child text-[#4a2131] font-normal text-sm md:text-base mb-6 max-w-md mx-auto leading-relaxed">
+                        Some people make life brighter simply by being themselves. Aqsu, this little world was made just for you — every chapter, every little detail, and every wish waiting inside it.
+                    </p>
+
+                    <div class="anim-child flex items-center justify-center gap-4">
+                        <button id="btn-step-1" class="btn-luxury">
+                            <span>Open Your Surprise &rarr;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= STEP 2: Personal Birthday Letter ================= -->
+            <div id="step2" class="step max-w-xl md:max-w-2xl p-5 md:p-7 text-center">
+                <div class="step-border-glow"></div>
+                <div class="luxury-corner luxury-corner-tl"></div>
+                <div class="luxury-corner luxury-corner-br"></div>
+                <div class="card-bow-tr">🎀</div>
+                <img src="./bucky.png" alt="Bouquet" class="card-bouquet-bl" loading="eager">
+
+                <div class="step-inner p-1 md:p-2">
+                    <div class="anim-child mb-1.5">
+                        <div class="luxury-badge">
+                            <span class="sparkle-icon">✦</span> A LETTER FOR AQSU ✦ <span class="sparkle-icon">✦</span>
+                        </div>
+                    </div>
+
+                    <h2 class="anim-child font-serif-luxury text-2xl md:text-3xl lg:text-4xl font-bold text-gradient-rose mb-1 mt-1 leading-tight">
+                        Happy Birthday, My Girl. ♡
+                    </h2>
+
+                    <div class="anim-child filigree-divider my-2">
+                        <span>✦</span>
+                        <span class="filigree-line"></span>
+                        <span>♡</span>
+                        <span class="filigree-line"></span>
+                        <span>✦</span>
+                    </div>
+
+                    <!-- Personal Birthday Letter Box -->
+                    <div class="anim-child letter-content-box p-4 md:p-6 max-h-[46vh] md:max-h-[48vh] overflow-y-auto custom-letter-scroll text-center space-y-3.5 my-2.5">
+                        <p class="font-editorial text-lg md:text-xl text-[#b83362] font-semibold italic">
+                            Happy Birthday, my girl. ❤️
+                        </p>
+
+                        <p class="text-[#4a2131] text-sm md:text-[0.95rem] leading-relaxed font-normal">
+                            Allah bless you, and thank you for becoming such a beautiful friend in my life. When I had no one, I used to pray, “Allah, please send me someone who is truly my friend, someone I can call my own.” And then, somehow, He blessed me with you.
+                        </p>
+
+                        <p class="text-[#4a2131] text-sm md:text-[0.95rem] leading-relaxed font-normal">
+                            Thank you for being there, for being the kind of friend I once prayed for, and for becoming such a precious part of my life.
+                        </p>
+
+                        <p class="text-[#4a2131] text-sm md:text-[0.95rem] leading-relaxed font-normal">
+                            My biggest prayer for you is that sadness never takes away the beauty of your smile. May Allah keep opening doors of mercy and blessings for you. May He fill your life with so much happiness that you never run out of reasons to be grateful. May you see more happiness than hardship, more peace than pain, and more beautiful days than difficult ones. 🤍✨
+                        </p>
+
+                        <p class="text-[#4a2131] text-sm md:text-[0.95rem] leading-relaxed font-normal">
+                            I pray that our friendship always remains strong and that no distance, time, or circumstance ever takes away the bond we share.
+                        </p>
+
+                        <p class="text-[#4a2131] text-sm md:text-[0.95rem] leading-relaxed font-normal">
+                            Sometimes, Aqsu, I feel like you are one of Allah's beautiful gifts to me. And I never want to be ungrateful for a gift this precious. I could never forget the place you hold in my life, even if I lived a thousand lives.
+                        </p>
+
+                        <p class="text-[#4a2131] text-sm md:text-[0.95rem] leading-relaxed font-normal">
+                            You are one of the most beautiful parts of my life, and I hope you always know how much you mean to me.
+                        </p>
+
+                        <!-- Special Closing Emphasis -->
+                        <div class="pt-3 pb-1 border-t border-rose-200/60">
+                            <p class="font-serif-luxury text-base md:text-lg font-bold text-gradient-rose leading-relaxed">
+                                I love you so much, jaan. ❤️<br>
+                                <span class="text-sm md:text-base font-semibold text-[#8b3d5b]">You are truly the best friend anyone could ask for.</span><br>
+                                I love you so, so much. 🫶🏻✨
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="anim-child flex items-center justify-center gap-3 mt-2.5">
+                        <button id="btn-back-2" class="btn-secondary-luxury">Back</button>
+                        <button id="btn-step-2" class="btn-luxury">
+                            <span>See What I Adore &rarr;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= STEP 3: What Makes Aqsu Special ================= -->
+            <div id="step3" class="step max-w-xl md:max-w-2xl p-5 md:p-7 text-center">
+                <div class="step-border-glow"></div>
+                <div class="luxury-corner luxury-corner-tl"></div>
+                <div class="luxury-corner luxury-corner-br"></div>
+                <div class="card-bow-tr">🎀</div>
+                <img src="./bucky.png" alt="Bouquet" class="card-bouquet-bl" loading="eager">
+
+                <div class="step-inner p-1 md:p-2">
+                    <div class="anim-child mb-1.5">
+                        <div class="luxury-badge">
+                            <span class="sparkle-icon">✦</span> THE LITTLE THINGS ✦
+                        </div>
+                    </div>
+
+                    <h2 class="anim-child font-serif-luxury text-2xl md:text-3xl lg:text-4xl font-bold text-gradient-rose mb-1 mt-1 leading-tight">
+                        What Makes You, You
+                    </h2>
+
+                    <div class="anim-child filigree-divider my-2">
+                        <span>✦</span>
+                        <span class="filigree-line"></span>
+                        <span>♡</span>
+                        <span class="filigree-line"></span>
+                        <span>✦</span>
+                    </div>
+
+                    <!-- 4 Elegant Quality Cards -->
+                    <div class="anim-child bento-grid my-3">
+                        <!-- CARD 1 -->
+                        <div class="bento-card">
+                            <div class="flex items-center gap-2 mb-1.5">
+                                <span class="text-xl">🌸</span>
+                                <h3 class="font-serif-luxury text-base md:text-lg font-bold text-[#b83362]">Your Kindness</h3>
+                            </div>
+                            <p class="text-[#4a2131] text-xs md:text-sm leading-relaxed font-normal">
+                                Aqsu, you have a way of making people feel seen, heard, and comfortable without even trying. That kind of warmth is rare.
+                            </p>
+                        </div>
+
+                        <!-- CARD 2 -->
+                        <div class="bento-card">
+                            <div class="flex items-center gap-2 mb-1.5">
+                                <span class="text-xl">✨</span>
+                                <h3 class="font-serif-luxury text-base md:text-lg font-bold text-[#b83362]">That Beautiful Smile</h3>
+                            </div>
+                            <p class="text-[#4a2131] text-xs md:text-sm leading-relaxed font-normal">
+                                Your smile has this effortless way of making an ordinary moment feel lighter. It's one of those little things people remember.
+                            </p>
+                        </div>
+
+                        <!-- CARD 3 -->
+                        <div class="bento-card">
+                            <div class="flex items-center gap-2 mb-1.5">
+                                <span class="text-xl">🤍</span>
+                                <h3 class="font-serif-luxury text-base md:text-lg font-bold text-[#b83362]">Your Heart</h3>
+                            </div>
+                            <p class="text-[#4a2131] text-xs md:text-sm leading-relaxed font-normal">
+                                Behind everything is a heart that cares deeply, loves genuinely, and always finds a little more kindness to give.
+                            </p>
+                        </div>
+
+                        <!-- CARD 4 -->
+                        <div class="bento-card">
+                            <div class="flex items-center gap-2 mb-1.5">
+                                <span class="text-xl">💫</span>
+                                <h3 class="font-serif-luxury text-base md:text-lg font-bold text-[#b83362]">Your Presence</h3>
+                            </div>
+                            <p class="text-[#4a2131] text-xs md:text-sm leading-relaxed font-normal">
+                                Some people simply make moments better by being there. Aqsu, you're one of those people.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="anim-child flex items-center justify-center gap-3 mt-2.5">
+                        <button id="btn-back-3" class="btn-secondary-luxury">Back</button>
+                        <button id="btn-step-3" class="btn-luxury">
+                            <span>A Special Memory &rarr;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= STEP 4: A Little Dua For Your Future ================= -->
+            <div id="step4" class="step max-w-lg p-5 md:p-7 text-center">
+                <div class="step-border-glow"></div>
+                <div class="luxury-corner luxury-corner-tl"></div>
+                <div class="luxury-corner luxury-corner-br"></div>
+                <div class="card-bow-tr">🎀</div>
+                <img src="./bucky.png" alt="Bouquet" class="card-bouquet-bl" loading="eager">
+
+                <div class="step-inner p-1 md:p-2">
+                    <div class="anim-child mb-1.5 mt-1">
+                        <div class="luxury-badge">
+                            <span class="sparkle-icon">✦</span> A LITTLE DUA FOR YOUR FUTURE ✦ <span class="sparkle-icon">✦</span>
+                        </div>
+                    </div>
+
+                    <h2 class="anim-child font-serif-luxury text-2xl md:text-3xl font-bold text-gradient-rose mb-2 mt-1 leading-tight">
+                        For You, Aqsu ♡
+                    </h2>
+
+                    <div class="anim-child filigree-divider my-2">
+                        <span>✦</span>
+                        <span class="filigree-line"></span>
+                        <span>♡</span>
+                        <span class="filigree-line"></span>
+                        <span>✦</span>
+                    </div>
+
+                    <div id="polaroid-container" class="anim-child my-3 flex justify-center">
+                        <div class="w-full max-w-sm rounded-2xl overflow-hidden shadow-md border border-[rgba(240,109,148,0.25)] bg-white/75 backdrop-blur-sm p-2">
+                            <img src="./image.png"
+                                 alt="A Little Dua For Your Future"
+                                 class="w-full h-44 sm:h-48 md:h-52 object-cover rounded-xl shadow-inner">
+                        </div>
+                    </div>
+
+                    <p class="anim-child text-[#4a2131] text-sm md:text-[0.95rem] font-medium leading-relaxed my-3 max-w-md mx-auto">
+                        Aqsu, may Allah bless you with a mahram who knows your worth, understands your heart, and knows how to cherish you. May Allah grant you someone as wonderful as the person you have always imagined. Ameen 💗🫶✨
+                    </p>
+
+                    <div class="anim-child flex items-center justify-center gap-3">
+                        <button id="btn-back-4" class="btn-secondary-luxury">Back</button>
+                        <button id="btn-step-4" class="btn-luxury">
+                            <span>The Grand Wish &rarr;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= STEP 5: Before You Go & Finale ================= -->
+            <div id="step5" class="step max-w-lg md:max-w-xl p-6 md:p-8 text-center">
+                <div class="step-border-glow"></div>
+                <div class="luxury-corner luxury-corner-tl"></div>
+                <div class="luxury-corner luxury-corner-br"></div>
+                <div class="card-bow-tr">🎀</div>
+                <img src="./bucky.png" alt="Bouquet" class="card-bouquet-bl" loading="eager">
+
+                <div class="step-inner p-1 md:p-2">
+                    <div class="anim-child mb-2 mt-1">
+                        <div class="luxury-badge">
+                            <span>BEFORE YOU GO ✦</span>
+                        </div>
+                    </div>
+
+                    <h2 class="anim-child font-serif-luxury text-3xl md:text-4xl font-bold text-gradient-rose mb-1 mt-1 leading-tight">
+                        One Last Thing, Aqsu…
+                    </h2>
+
+                    <div class="anim-child filigree-divider my-2.5">
+                        <span>✦</span>
+                        <span class="filigree-line"></span>
+                        <span>♡</span>
+                        <span class="filigree-line"></span>
+                        <span>✦</span>
+                    </div>
+
+                    <p class="anim-child text-[#4a2131] text-sm md:text-[0.98rem] font-normal leading-relaxed max-w-md mx-auto mb-3">
+                        Aqsu, I hope you always remember how deeply you are appreciated, how many beautiful moments are still waiting for you, and how much brighter life becomes when you are simply yourself.
+                    </p>
+
+                    <div class="anim-child my-2.5">
+                        <p class="font-editorial text-lg md:text-xl text-[#b83362] italic font-semibold leading-relaxed">
+                            Keep smiling, keep dreaming, and never forget how special you are. ♡
+                        </p>
+                    </div>
+
+                    <!-- Hidden Wish reveal on celebration -->
+                    <div id="final-message-box" class="anim-child my-2.5 min-h-[3.8rem] flex items-center justify-center">
+                        <div id="final-wish" class="opacity-0 translate-y-4 transition-all duration-700 final-wish-box px-6 py-3.5 rounded-2xl backdrop-blur-md">
+                            <p class="font-serif-luxury text-xl md:text-2xl font-bold text-gradient-rose mb-0.5">
+                                Happy Birthday, Aqsu. ♡
+                            </p>
+                            <p class="text-sm md:text-base text-[#8b3d5b] font-medium">
+                                May this year be unforgettable.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="anim-child flex items-center justify-center gap-4 mt-2">
+                        <button id="btn-back-5" class="btn-secondary-luxury">Back</button>
+                        <button id="confetti-btn" class="btn-luxury text-base px-8 py-3.5">
+                            <span>Make A Wish ✨</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Subtle Creator Signature Credit -->
+    <div class="creator-signature">
+        <span>CRAFTED WITH LOVE · CREATED BY SHEIKH</span>
+    </div>
+
+    <!-- ================= JAVASCRIPT & THREE.JS 3D SCENE ================= -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            /* ----------------------------------------------------
+               1. BACKGROUND SOUNDTRACK (song.mp3) & AUDIO SYSTEM
+            ---------------------------------------------------- */
+            const bgMusic = document.getElementById('bg-music') || new Audio('./song.mp3');
+            bgMusic.src = './song.mp3';
+            bgMusic.preload = 'auto';
+            bgMusic.loop = true;
+
+            const TARGET_VOLUME = 0.3; // Comfortable volume level (0.25 - 0.35)
+            let userExplicitlyPaused = false;
+            let fadeTween = null;
+
+            const audioToggleBtn = document.getElementById('audio-toggle');
+            const soundIconOn = document.getElementById('sound-icon-on');
+            const soundIconOff = document.getElementById('sound-icon-off');
+
+            function updateAudioUI(isPlaying) {
+                if (isPlaying) {
+                    soundIconOn.classList.remove('hidden');
+                    soundIconOff.classList.add('hidden');
+                    audioToggleBtn.setAttribute('title', 'Pause Music');
+                    audioToggleBtn.setAttribute('aria-label', 'Pause Music');
+                } else {
+                    soundIconOn.classList.add('hidden');
+                    soundIconOff.classList.remove('hidden');
+                    audioToggleBtn.setAttribute('title', 'Play Music');
+                    audioToggleBtn.setAttribute('aria-label', 'Play Music');
+                }
+            }
+
+            function playBackgroundMusic(fadeIn = true) {
+                if (!bgMusic) return Promise.resolve();
+                userExplicitlyPaused = false;
+
+                if (fadeTween) {
+                    fadeTween.kill();
+                    fadeTween = null;
+                }
+
+                if (fadeIn && bgMusic.paused) {
+                    bgMusic.volume = 0;
+                } else if (!fadeIn) {
+                    bgMusic.volume = TARGET_VOLUME;
+                }
+
+                const playPromise = bgMusic.play();
+                if (playPromise !== undefined) {
+                    return playPromise.then(() => {
+                        updateAudioUI(true);
+                        if (fadeIn) {
+                            fadeTween = gsap.to(bgMusic, {
+                                volume: TARGET_VOLUME,
+                                duration: 1.6,
+                                ease: 'power1.out',
+                                onComplete: () => {
+                                    bgMusic.volume = TARGET_VOLUME;
+                                    fadeTween = null;
+                                }
+                            });
+                        }
+                    }).catch(() => {
+                        // Silently handle autoplay restriction until first user interaction
+                        updateAudioUI(false);
+                    });
+                }
+                return Promise.resolve();
+            }
+
+            function pauseBackgroundMusic() {
+                if (!bgMusic) return;
+                userExplicitlyPaused = true;
+                if (fadeTween) {
+                    fadeTween.kill();
+                    fadeTween = null;
+                }
+                bgMusic.pause();
+                updateAudioUI(false);
+            }
+
+            function toggleBackgroundMusic() {
+                if (bgMusic.paused) {
+                    playBackgroundMusic(true);
+                } else {
+                    pauseBackgroundMusic();
+                }
+            }
+
+            audioToggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                initAudio();
+                toggleBackgroundMusic();
+            });
+
+            // Keep audio element events and UI strictly synchronized
+            bgMusic.addEventListener('play', () => updateAudioUI(true));
+            bgMusic.addEventListener('pause', () => {
+                if (bgMusic.paused) {
+                    updateAudioUI(false);
+                }
+            });
+
+            // Handle first user interaction for browsers blocking autoplay
+            function handleFirstInteraction() {
+                removeInteractionListeners();
+                initAudio();
+                if (!userExplicitlyPaused && bgMusic.paused) {
+                    playBackgroundMusic(true);
+                }
+            }
+
+            function removeInteractionListeners() {
+                ['click', 'touchstart', 'keydown', 'pointerdown'].forEach(event => {
+                    document.removeEventListener(event, handleFirstInteraction, { capture: true });
+                });
+            }
+
+            ['click', 'touchstart', 'keydown', 'pointerdown'].forEach(event => {
+                document.addEventListener(event, handleFirstInteraction, { capture: true, once: true });
+            });
+
+            // Attempt autoplay on page load
+            playBackgroundMusic(true);
+
+            // Optional Web Audio Chimes & Fanfare for subtle accent effects
+            let audioCtx = null;
+            function initAudio() {
+                try {
+                    if (!audioCtx) {
+                        const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+                        if (AudioCtxClass) audioCtx = new AudioCtxClass();
+                    }
+                    if (audioCtx && audioCtx.state === 'suspended') {
+                        audioCtx.resume();
+                    }
+                } catch(e) {}
+            }
+
+            function playCrystalChord(notes = [523.25, 659.25, 783.99, 1046.5]) {
+                if (userExplicitlyPaused || bgMusic.paused) return;
+                try {
+                    initAudio();
+                    if (!audioCtx) return;
+                    const now = audioCtx.currentTime;
+                    notes.forEach((freq, i) => {
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(freq, now + i * 0.08);
+
+                        gain.gain.setValueAtTime(0, now + i * 0.08);
+                        gain.gain.linearRampToValueAtTime(0.04, now + i * 0.08 + 0.04);
+                        gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.08 + 1.8);
+
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+
+                        osc.start(now + i * 0.08);
+                        osc.stop(now + i * 0.08 + 2.0);
+                    });
+                } catch(e) { /* ignore audio fallback */ }
+            }
+
+            function playCelebrationFanfare() {
+                if (userExplicitlyPaused || bgMusic.paused) return;
+                try {
+                    initAudio();
+                    if (!audioCtx) return;
+                    const now = audioCtx.currentTime;
+                    const melody = [
+                        { f: 523.25, t: 0.0 },
+                        { f: 659.25, t: 0.12 },
+                        { f: 783.99, t: 0.24 },
+                        { f: 1046.50, t: 0.36 },
+                        { f: 1318.51, t: 0.52 },
+                        { f: 1567.98, t: 0.70 }
+                    ];
+                    melody.forEach(item => {
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(item.f, now + item.t);
+                        gain.gain.setValueAtTime(0, now + item.t);
+                        gain.gain.linearRampToValueAtTime(0.08, now + item.t + 0.03);
+                        gain.gain.exponentialRampToValueAtTime(0.0001, now + item.t + 2.2);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(now + item.t);
+                        osc.stop(now + item.t + 2.5);
+                    });
+                } catch(e) { }
+            }
+
+            /* ----------------------------------------------------
+               2. THREE.JS DREAMY PASTEL 3D SCENE (BALLOONS, PETALS, HEARTS, STARDUST)
+            ---------------------------------------------------- */
+            let scene, camera, renderer;
+            const balloons = [];
+            const petals = [];
+            const hearts = [];
+            let stardustMesh;
+            const container = document.getElementById('canvas-container');
+
+            function initThreeScene() {
+                scene = new THREE.Scene();
+                camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+                camera.position.z = 40;
+
+                renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                container.appendChild(renderer.domElement);
+
+                // Soft warm lighting for creamy pastel look
+                const ambientLight = new THREE.AmbientLight(0xfff0f3, 1.1);
+                scene.add(ambientLight);
+
+                const dirLight1 = new THREE.DirectionalLight(0xffffff, 0.9);
+                dirLight1.position.set(20, 40, 30);
+                scene.add(dirLight1);
+
+                const dirLight2 = new THREE.DirectionalLight(0xffc2d4, 0.7);
+                dirLight2.position.set(-25, -20, 20);
+                scene.add(dirLight2);
+
+                const goldPointLight = new THREE.PointLight(0xf3d9a4, 0.9, 80);
+                goldPointLight.position.set(0, 10, 15);
+                scene.add(goldPointLight);
+
+                createPastelBalloons();
+                createFlowerPetals();
+                createCrystalHearts();
+                createStardustParticles();
+
+                animateThree();
+            }
+
+            // 1. Create 3D Glossy Pastel Balloons
+            function createPastelBalloons() {
+                const balloonPalette = [
+                    { color: 0xf9b8cc }, // Blush Pink
+                    { color: 0xf3d9a4 }, // Champagne Gold
+                    { color: 0xffe4d6 }, // Peach Cream
+                    { color: 0xe3c7f7 }  // Lavender Mist
+                ];
+
+                for (let i = 0; i < 12; i++) {
+                    const group = new THREE.Group();
+
+                    const sphereGeo = new THREE.SphereGeometry(1.6, 24, 24);
+                    sphereGeo.scale(1, 1.3, 1);
+
+                    const config = balloonPalette[i % balloonPalette.length];
+                    const material = new THREE.MeshPhongMaterial({
+                        color: config.color,
+                        specular: 0xffffff,
+                        shininess: 100,
+                        transparent: true,
+                        opacity: 0.9
+                    });
+                    const balloonMesh = new THREE.Mesh(sphereGeo, material);
+                    group.add(balloonMesh);
+
+                    // Highlight sheen spot for realism
+                    const sheen = new THREE.Mesh(
+                        new THREE.SphereGeometry(0.35, 12, 12),
+                        new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.55 })
+                    );
+                    sheen.position.set(-0.55, 0.7, 1.1);
+                    group.add(sheen);
+
+                    // Balloon Knot
+                    const knotGeo = new THREE.ConeGeometry(0.3, 0.4, 12);
+                    knotGeo.rotateX(Math.PI);
+                    knotGeo.translate(0, -2.1, 0);
+                    const knotMesh = new THREE.Mesh(knotGeo, material);
+                    group.add(knotMesh);
+
+                    // String
+                    const curve = new THREE.QuadraticBezierCurve3(
+                        new THREE.Vector3(0, -2.2, 0),
+                        new THREE.Vector3(Math.sin(i) * 0.8, -4.5, 0),
+                        new THREE.Vector3(0, -6.8, 0)
+                    );
+                    const points = curve.getPoints(16);
+                    const stringGeo = new THREE.BufferGeometry().setFromPoints(points);
+                    const stringMat = new THREE.LineBasicMaterial({ color: 0xd9a0b4, transparent: true, opacity: 0.4 });
+                    const stringMesh = new THREE.Line(stringGeo, stringMat);
+                    group.add(stringMesh);
+
+                    const scale = 0.8 + Math.random() * 0.6;
+                    group.scale.set(scale, scale, scale);
+                    group.position.set(
+                        (Math.random() - 0.5) * 65,
+                        (Math.random() - 0.5) * 45,
+                        (Math.random() - 0.5) * 30 - 8
+                    );
+
+                    group.userData = {
+                        originY: group.position.y,
+                        floatSpeed: 0.0015 + Math.random() * 0.002,
+                        swaySpeed: 0.001 + Math.random() * 0.0015,
+                        swayAmount: 1.5 + Math.random() * 2,
+                        phase: Math.random() * Math.PI * 2
+                    };
+
+                    balloons.push(group);
+                    scene.add(group);
+                }
+            }
+
+            // 2. Create Fluttering Rose Petals
+            function createFlowerPetals() {
+                const petalColors = [0xffccd5, 0xffb7c5, 0xfecdd3, 0xfda4af, 0xffe8dd, 0xfff0f4];
+
+                for (let i = 0; i < 24; i++) {
+                    const geo = new THREE.PlaneGeometry(1.6, 2.2, 6, 6);
+                    const pos = geo.attributes.position;
+                    for (let v = 0; v < pos.count; v++) {
+                        const x = pos.getX(v);
+                        const y = pos.getY(v);
+                        pos.setZ(v, Math.sin((x + 0.8) / 1.6 * Math.PI) * 0.35 + (y * y) * 0.05);
+                    }
+                    geo.computeVertexNormals();
+
+                    const mat = new THREE.MeshPhongMaterial({
+                        color: petalColors[i % petalColors.length],
+                        side: THREE.DoubleSide,
+                        shininess: 60,
+                        specular: 0xffffff,
+                        transparent: true,
+                        opacity: 0.9
+                    });
+
+                    const petal = new THREE.Mesh(geo, mat);
+                    petal.scale.setScalar(0.7 + Math.random() * 0.7);
+                    petal.position.set(
+                        (Math.random() - 0.5) * 70,
+                        (Math.random() - 0.5) * 50,
+                        (Math.random() - 0.5) * 30
+                    );
+                    petal.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+
+                    petal.userData = {
+                        originY: petal.position.y,
+                        rotSpeedX: (Math.random() - 0.5) * 0.015,
+                        rotSpeedY: (Math.random() - 0.5) * 0.02,
+                        rotSpeedZ: (Math.random() - 0.5) * 0.015,
+                        floatSpeed: 0.002 + Math.random() * 0.0025,
+                        amplitude: 2 + Math.random() * 2
+                    };
+
+                    petals.push(petal);
+                    scene.add(petal);
+                }
+            }
+
+            // 3. Create 3D Crystal Hearts (Translucent Bokeh Style)
+            function createCrystalHearts() {
+                const heartShape = new THREE.Shape();
+                heartShape.moveTo(25, 25);
+                heartShape.bezierCurveTo(25, 25, 20, 0, 0, 0);
+                heartShape.bezierCurveTo(-30, 0, -30, 35, -30, 35);
+                heartShape.bezierCurveTo(-30, 55, -10, 77, 25, 95);
+                heartShape.bezierCurveTo(60, 77, 80, 55, 80, 35);
+                heartShape.bezierCurveTo(80, 35, 80, 0, 50, 0);
+                heartShape.bezierCurveTo(35, 0, 25, 25, 25, 25);
+
+                const extrudeSettings = { depth: 4, bevelEnabled: true, bevelSegments: 2, steps: 1, bevelSize: 1, bevelThickness: 1 };
+                const geometry = new THREE.ExtrudeGeometry(heartShape, extrudeSettings);
+                geometry.center();
+
+                const heartColors = [0xf585ab, 0xf9b8cc, 0xe9bd6f, 0xee5c8d];
+
+                for (let i = 0; i < 12; i++) {
+                    const material = new THREE.MeshPhongMaterial({
+                        color: heartColors[i % heartColors.length],
+                        emissive: 0x4a1828,
+                        shininess: 40,
+                        specular: 0xffd0e0,
+                        transparent: true,
+                        opacity: 0.6
+                    });
+
+                    const heart = new THREE.Mesh(geometry, material);
+                    const scale = 0.018 + Math.random() * 0.016;
+                    heart.scale.set(scale, scale, scale);
+                    heart.position.set(
+                        (Math.random() - 0.5) * 65,
+                        (Math.random() - 0.5) * 45,
+                        (Math.random() - 0.5) * 20 - 10
+                    );
+                    heart.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+
+                    heart.userData = {
+                        originY: heart.position.y,
+                        rotX: (Math.random() - 0.5) * 0.01,
+                        rotY: (Math.random() - 0.5) * 0.012,
+                        floatSpeed: 0.0015 + Math.random() * 0.0018,
+                        floatDistance: 1.2 + Math.random() * 1.5
+                    };
+
+                    hearts.push(heart);
+                    scene.add(heart);
+                }
+            }
+
+            // 4. Create Rosy Stardust Particles
+            function createStardustParticles() {
+                const particleCount = 130;
+                const geometry = new THREE.BufferGeometry();
+                const positions = new Float32Array(particleCount * 3);
+
+                for (let i = 0; i < particleCount * 3; i += 3) {
+                    positions[i] = (Math.random() - 0.5) * 80;
+                    positions[i + 1] = (Math.random() - 0.5) * 60;
+                    positions[i + 2] = (Math.random() - 0.5) * 40;
+                }
+
+                geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+                const canvas = document.createElement('canvas');
+                canvas.width = 32; canvas.height = 32;
+                const ctx = canvas.getContext('2d');
+                const grad = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+                grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+                grad.addColorStop(0.3, 'rgba(249, 184, 204, 0.85)');
+                grad.addColorStop(1, 'rgba(249, 184, 204, 0)');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, 32, 32);
+
+                const texture = new THREE.CanvasTexture(canvas);
+                const material = new THREE.PointsMaterial({
+                    size: 1.3,
+                    map: texture,
+                    transparent: true,
+                    opacity: 0.8,
+                    blending: THREE.NormalBlending,
+                    depthWrite: false
+                });
+
+                stardustMesh = new THREE.Points(geometry, material);
+                scene.add(stardustMesh);
+            }
+
+            // Animation Loop
+            function animateThree() {
+                requestAnimationFrame(animateThree);
+                const time = Date.now();
+
+                balloons.forEach((b, idx) => {
+                    b.position.y = b.userData.originY + Math.sin(time * b.userData.floatSpeed + b.userData.phase) * b.userData.swayAmount;
+                    b.rotation.z = Math.sin(time * b.userData.swaySpeed + idx) * 0.08;
+                    b.rotation.y += 0.003;
+                });
+
+                petals.forEach((p) => {
+                    p.rotation.x += p.userData.rotSpeedX;
+                    p.rotation.y += p.userData.rotSpeedY;
+                    p.rotation.z += p.userData.rotSpeedZ;
+                    p.position.y = p.userData.originY + Math.sin(time * p.userData.floatSpeed + p.position.x) * p.userData.amplitude;
+                });
+
+                hearts.forEach((h) => {
+                    h.rotation.x += h.userData.rotX;
+                    h.rotation.y += h.userData.rotY;
+                    h.position.y = h.userData.originY + Math.sin(time * h.userData.floatSpeed + h.position.x) * h.userData.floatDistance;
+                });
+
+                if (stardustMesh) {
+                    stardustMesh.rotation.y = time * 0.00008;
+                    stardustMesh.rotation.x = Math.sin(time * 0.00005) * 0.1;
+                }
+
+                renderer.render(scene, camera);
+            }
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            /* ----------------------------------------------------
+               3. INTERACTIVE 3D CARD TILT & SPECULAR GLARE
+            ---------------------------------------------------- */
+            const steps = document.querySelectorAll('.step');
+            steps.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const rotateX = ((y - centerY) / centerY) * -5;
+                    const rotateY = ((x - centerX) / centerX) * 5;
+
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+
+                    gsap.to(card, {
+                        rotateX: rotateX,
+                        rotateY: rotateY,
+                        duration: 0.4,
+                        ease: "power2.out",
+                        transformPerspective: 1000
+                    });
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    gsap.to(card, {
+                        rotateX: 0,
+                        rotateY: 0,
+                        duration: 0.7,
+                        ease: "power3.out"
+                    });
+                });
+            });
+
+            /* ----------------------------------------------------
+               4. STEP NAVIGATION & LUXURY TRANSITIONS
+            ---------------------------------------------------- */
+            const totalSteps = 5;
+            let currentStep = 1;
+            const stepLabel = document.getElementById('step-label');
+
+            function updateProgressUI() {
+                stepLabel.textContent = `Chapter 0${currentStep} / 0${totalSteps}`;
+                for (let i = 1; i <= totalSteps; i++) {
+                    const dot = document.getElementById(`dot-${i}`);
+                    if (dot) {
+                        if (i === currentStep) {
+                            dot.classList.add('active');
+                        } else {
+                            dot.classList.remove('active');
+                        }
+                    }
+                }
+            }
+
+            function goToStep(stepNumber, direction = 1) {
+                if (stepNumber < 1 || stepNumber > totalSteps) return;
+
+                const currentEl = document.getElementById(`step${currentStep}`);
+                const nextEl = document.getElementById(`step${stepNumber}`);
+
+                if (currentEl && currentEl !== nextEl) {
+                    gsap.to(currentEl, {
+                        opacity: 0,
+                        y: direction > 0 ? -20 : 20,
+                        scale: 0.96,
+                        duration: 0.25,
+                        ease: "power2.inOut",
+                        onComplete: () => {
+                            currentEl.classList.remove('active');
+                            currentEl.style.display = 'none';
+
+                            if (nextEl) {
+                                nextEl.style.display = 'block';
+                                nextEl.classList.add('active');
+                                gsap.fromTo(nextEl,
+                                    { opacity: 0, y: direction > 0 ? 20 : -20, scale: 0.96 },
+                                    { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "power3.out", clearProps: "all" }
+                                );
+                            }
+                        }
+                    });
+                } else if (nextEl) {
+                    nextEl.style.display = 'block';
+                    nextEl.classList.add('active');
+                    gsap.fromTo(nextEl,
+                        { opacity: 0, y: 20, scale: 0.96 },
+                        { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "power3.out", clearProps: "all" }
+                    );
+                }
+
+                currentStep = stepNumber;
+                updateProgressUI();
+                playCrystalChord();
+            }
+
+            document.getElementById('btn-step-1').addEventListener('click', () => goToStep(2, 1));
+            document.getElementById('btn-step-2').addEventListener('click', () => goToStep(3, 1));
+            document.getElementById('btn-back-2').addEventListener('click', () => goToStep(1, -1));
+
+            document.getElementById('btn-step-3').addEventListener('click', () => goToStep(4, 1));
+            document.getElementById('btn-back-3').addEventListener('click', () => goToStep(2, -1));
+
+            document.getElementById('btn-step-4').addEventListener('click', () => goToStep(5, 1));
+            document.getElementById('btn-back-4').addEventListener('click', () => goToStep(3, -1));
+            document.getElementById('btn-back-5').addEventListener('click', () => goToStep(4, -1));
+
+            /* ----------------------------------------------------
+               5. GRAND CELEBRATION CLIMAX SEQUENCE
+            ---------------------------------------------------- */
+            const confettiBtn = document.getElementById('confetti-btn');
+            const finalWish = document.getElementById('final-wish');
+
+            confettiBtn.addEventListener('click', () => {
+                confettiBtn.style.pointerEvents = 'none';
+                gsap.to(confettiBtn, { scale: 0.9, opacity: 0, duration: 0.4 });
+
+                finalWish.classList.remove('opacity-0', 'translate-y-4');
+                finalWish.classList.add('opacity-100', 'translate-y-0');
+                gsap.fromTo(finalWish,
+                    { scale: 0.85, filter: 'drop-shadow(0 0 0px rgba(240,109,148,0))' },
+                    { scale: 1.05, filter: 'drop-shadow(0 0 35px rgba(238,92,141,0.7))', duration: 1.2, yoyo: true, repeat: 1, ease: 'power2.out' }
+                );
+
+                playCelebrationFanfare();
+
+                // Multi-Stage Confetti Cannon Shower — pastel palette
+                const duration = 6 * 1000;
+                const end = Date.now() + duration;
+                const colors = ['#f9b8cc', '#ee5c8d', '#fda4af', '#f3d9a4', '#ffffff', '#e3c7f7', '#ffd9be'];
+
+                (function frame() {
+                    confetti({
+                        particleCount: 7,
+                        angle: 60,
+                        spread: 65,
+                        origin: { x: 0, y: 0.75 },
+                        colors: colors,
+                        ticks: 200,
+                        zIndex: 100
+                    });
+                    confetti({
+                        particleCount: 7,
+                        angle: 120,
+                        spread: 65,
+                        origin: { x: 1, y: 0.75 },
+                        colors: colors,
+                        ticks: 200,
+                        zIndex: 100
+                    });
+
+                    if (Date.now() < end) {
+                        requestAnimationFrame(frame);
+                    }
+                }());
+
+                // Special Flower & Heart Emoji Burst
+                setTimeout(() => {
+                    confetti({
+                        particleCount: 30,
+                        spread: 100,
+                        origin: { y: 0.6 },
+                        emojis: ['🌸', '🌹', '💖', '🎈', '👑', '🎂'],
+                        scalar: 2.8,
+                        zIndex: 110
+                    });
+                }, 400);
+
+                setTimeout(() => {
+                    confetti({
+                        particleCount: 25,
+                        spread: 120,
+                        origin: { y: 0.5 },
+                        emojis: ['🌷', '✨', '💎', '🎉'],
+                        scalar: 2.5,
+                        zIndex: 110
+                    });
+                }, 1200);
+
+                // 3D Objects Grand Flight
+                balloons.forEach((b, i) => {
+                    gsap.to(b.position, {
+                        y: b.position.y + 70 + Math.random() * 30,
+                        x: b.position.x + (Math.random() - 0.5) * 40,
+                        duration: 5.5 + Math.random() * 2,
+                        ease: "power2.inOut",
+                        delay: i * 0.1
+                    });
+                });
+
+                petals.forEach((p, i) => {
+                    gsap.to(p.position, {
+                        y: p.position.y + 60,
+                        x: p.position.x + Math.sin(i) * 30,
+                        z: p.position.z + 20,
+                        duration: 6,
+                        ease: "power1.out",
+                        delay: i * 0.05
+                    });
+                    gsap.to(p.rotation, {
+                        x: "+=" + (Math.PI * 6),
+                        y: "+=" + (Math.PI * 6),
+                        duration: 6
+                    });
+                });
+
+                hearts.forEach((h, i) => {
+                    gsap.to(h.position, {
+                        y: h.position.y + 80,
+                        x: h.position.x + (Math.random() - 0.5) * 50,
+                        duration: 5,
+                        ease: "power2.inOut",
+                        delay: i * 0.08
+                    });
+                });
+
+                // HTML Floating balloons & foil hearts upward flight
+                gsap.to('.decor-float, .foil-heart', {
+                    y: -window.innerHeight - 150,
+                    opacity: 0,
+                    duration: 4.5,
+                    stagger: 0.08,
+                    ease: "power1.in"
+                });
+            });
+
+            // Initial Kickoff
+            initThreeScene();
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const initialStep = Math.min(5, Math.max(1, parseInt(urlParams.get('step')) || 1));
+            currentStep = initialStep;
+            updateProgressUI();
+
+            for (let i = 1; i <= 5; i++) {
+                const s = document.getElementById(`step${i}`);
+                if (s) {
+                    if (i === initialStep) {
+                        s.style.display = 'block';
+                        s.classList.add('active');
+                        gsap.fromTo(s,
+                            { opacity: 0, y: 20, scale: 0.96 },
+                            { opacity: 1, y: 0, scale: 1, duration: 0.4, ease: "power3.out", clearProps: "all" }
+                        );
+                    } else {
+                        s.style.display = 'none';
+                        s.classList.remove('active');
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
