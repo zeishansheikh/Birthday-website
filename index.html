@@ -805,9 +805,117 @@
             border: 1.5px solid rgba(235, 160, 185, 0.45);
             box-shadow: 0 14px 32px -10px rgba(217, 79, 126, 0.3), inset 0 1.5px 1px rgba(255,255,255,1);
         }
+
+        /* Entrance Overlay */
+        #entrance-overlay {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 100;
+            background: radial-gradient(circle at center, rgba(255, 246, 249, 0.96) 0%, rgba(255, 234, 242, 0.98) 100%);
+            backdrop-filter: blur(25px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #entrance-overlay.hidden-overlay {
+            opacity: 0;
+            transform: scale(1.08);
+            pointer-events: none;
+            display: none !important;
+        }
+        .entrance-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(255, 241, 247, 0.94));
+            border: 2px solid rgba(240, 109, 148, 0.45);
+            border-radius: 2.2rem;
+            padding: 2.5rem 2rem;
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 25px 65px -15px rgba(217, 79, 126, 0.35), inset 0 2px 2px rgba(255, 255, 255, 1);
+            position: relative;
+            animation: floatSlow 5.5s ease-in-out infinite;
+        }
+        .entrance-gift-icon {
+            font-size: 3.8rem;
+            margin-bottom: 0.8rem;
+            display: inline-block;
+            filter: drop-shadow(0 12px 24px rgba(240, 109, 148, 0.45));
+            animation: heartPulseLuxe 2.4s ease-in-out infinite;
+        }
+        .entrance-btn {
+            background: linear-gradient(135deg, #f06d94 0%, #d94f7e 50%, #b83362 100%);
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.08rem;
+            padding: 1.05rem 2.4rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 12px 28px -5px rgba(217, 79, 126, 0.55), inset 0 1px 1px rgba(255,255,255,0.7);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            letter-spacing: 0.02em;
+        }
+        .entrance-btn:hover {
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 18px 38px -5px rgba(217, 79, 126, 0.7);
+        }
+        .entrance-btn:active {
+            transform: translateY(0) scale(0.98);
+        }
     </style>
 </head>
 <body>
+    <!-- ================= ENTRANCE OVERLAY: Tap to Open Birthday Card & Start Music ================= -->
+    <div id="entrance-overlay">
+        <div class="entrance-card">
+            <div class="luxury-corner luxury-corner-tl"></div>
+            <div class="luxury-corner luxury-corner-br"></div>
+            <div class="card-bow-tr">🎀</div>
+
+            <div class="mb-2">
+                <div class="luxury-badge">
+                    <span class="sparkle-icon">✦</span> TO MY DEAREST COUSIN ✦
+                </div>
+            </div>
+
+            <div class="entrance-gift-icon">🎁</div>
+
+            <h1 class="font-serif-luxury text-2xl sm:text-3xl md:text-4xl font-bold text-gradient-dream mb-2 leading-tight">
+                A Birthday Surprise for Zonii
+            </h1>
+
+            <div class="filigree-divider my-2.5">
+                <span>✦</span>
+                <span class="filigree-line"></span>
+                <span>♡</span>
+                <span class="filigree-line"></span>
+                <span>✦</span>
+            </div>
+
+            <p class="text-[#4a2131] text-sm sm:text-base font-normal mb-5 leading-relaxed max-w-sm mx-auto">
+                Turn up your volume & tap below to open your personalized birthday surprise.
+            </p>
+
+            <button id="btn-open-envelope" class="entrance-btn">
+                <span>Open Birthday Card</span>
+                <span>✨</span>
+            </button>
+
+            <p class="text-xs text-[#8b3d5b] mt-3.5 font-medium opacity-85 flex items-center justify-center gap-1.5">
+                <span>🎵</span>
+                <span>Song starts playing automatically</span>
+            </p>
+        </div>
+    </div>
+
     <!-- Background Dreamy Birthday Cinematic Backdrop -->
     <div id="aurora-background"></div>
     <div id="ambient-light-overlay"></div>
@@ -1182,9 +1290,9 @@
             if (!bgMusic.src) bgMusic.src = './song.mp3';
             bgMusic.preload = 'auto';
             bgMusic.loop = true;
-            bgMusic.muted = false; // Always UNMUTED by default in Ring Mode
+            bgMusic.muted = false; // Always UNMUTED by default
 
-            const TARGET_VOLUME = 0.8; // Rich, vibrant, audible ring volume
+            const TARGET_VOLUME = 0.85; // Full rich audible volume
             bgMusic.volume = TARGET_VOLUME;
             let userExplicitlyPaused = false;
             let fadeTween = null;
@@ -1193,26 +1301,12 @@
             const soundIconOn = document.getElementById('sound-icon-on');
             const soundIconOff = document.getElementById('sound-icon-off');
             const audioStartBanner = document.getElementById('audio-start-banner');
-
-            function showAudioBanner() {
-                if (audioStartBanner && !userExplicitlyPaused && bgMusic.paused) {
-                    audioStartBanner.classList.remove('hidden');
-                    gsap.fromTo(audioStartBanner,
-                        { opacity: 0, y: 15 },
-                        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
-                    );
-                }
-            }
+            const entranceOverlay = document.getElementById('entrance-overlay');
+            const btnOpenEnvelope = document.getElementById('btn-open-envelope');
 
             function hideAudioBanner() {
                 if (audioStartBanner && !audioStartBanner.classList.contains('hidden')) {
-                    gsap.to(audioStartBanner, {
-                        opacity: 0,
-                        y: 10,
-                        duration: 0.35,
-                        ease: 'power2.in',
-                        onComplete: () => audioStartBanner.classList.add('hidden')
-                    });
+                    audioStartBanner.classList.add('hidden');
                 }
             }
 
@@ -1230,15 +1324,12 @@
                     audioToggleBtn.classList.remove('playing');
                     audioToggleBtn.setAttribute('title', 'Sound Muted - Click to Play');
                     audioToggleBtn.setAttribute('aria-label', 'Sound Muted - Click to Play');
-                    hideAudioBanner();
                 } else {
-                    // Waiting for user gesture to unlock sound: keep Ring Mode icon and show prompt
                     soundIconOn.classList.remove('hidden');
                     soundIconOff.classList.add('hidden');
                     audioToggleBtn.classList.add('playing');
                     audioToggleBtn.setAttribute('title', 'Sound Active (Ring Mode)');
                     audioToggleBtn.setAttribute('aria-label', 'Sound Active (Ring Mode)');
-                    showAudioBanner();
                 }
             }
 
@@ -1246,21 +1337,13 @@
                 if (!bgMusic) return Promise.resolve();
                 userExplicitlyPaused = false;
                 bgMusic.muted = false;
-
-                if (fadeTween) {
-                    fadeTween.kill();
-                    fadeTween = null;
-                }
-
                 bgMusic.volume = TARGET_VOLUME;
 
                 const playPromise = bgMusic.play();
                 if (playPromise !== undefined) {
                     return playPromise.then(() => {
                         updateAudioUI(true);
-                        removeInteractionListeners();
-                    }).catch(() => {
-                        // Browser autoplay policy requires user gesture: show hint banner
+                    }).catch((err) => {
                         updateAudioUI(false);
                     });
                 }
@@ -1270,10 +1353,6 @@
             function pauseBackgroundMusic() {
                 if (!bgMusic) return;
                 userExplicitlyPaused = true;
-                if (fadeTween) {
-                    fadeTween.kill();
-                    fadeTween = null;
-                }
                 bgMusic.pause();
                 updateAudioUI(false);
             }
@@ -1293,11 +1372,53 @@
                 toggleBackgroundMusic();
             });
 
-            if (audioStartBanner) {
-                audioStartBanner.addEventListener('click', (e) => {
+            // Master Entrance Trigger: Click to Open Card & Play Music Immediately
+            function openBirthdayCard() {
+                if (!entranceOverlay || entranceOverlay.classList.contains('hidden-overlay')) return;
+
+                initAudio();
+                userExplicitlyPaused = false;
+                bgMusic.muted = false;
+                bgMusic.volume = TARGET_VOLUME;
+                bgMusic.play().then(() => {
+                    updateAudioUI(true);
+                }).catch(err => {
+                    console.log('Play attempt on open:', err);
+                });
+
+                playCrystalChord();
+
+                if (typeof confetti === 'function') {
+                    confetti({
+                        particleCount: 50,
+                        spread: 75,
+                        origin: { y: 0.6 },
+                        colors: ['#f9b8cc', '#ee5c8d', '#fda4af', '#f3d9a4', '#ffffff']
+                    });
+                }
+
+                gsap.to(entranceOverlay, {
+                    opacity: 0,
+                    scale: 1.08,
+                    duration: 0.7,
+                    ease: "power2.inOut",
+                    onComplete: () => {
+                        entranceOverlay.classList.add('hidden-overlay');
+                        entranceOverlay.style.display = 'none';
+                    }
+                });
+            }
+
+            if (btnOpenEnvelope) {
+                btnOpenEnvelope.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    initAudio();
-                    playBackgroundMusic();
+                    openBirthdayCard();
+                });
+            }
+
+            if (entranceOverlay) {
+                entranceOverlay.addEventListener('click', () => {
+                    openBirthdayCard();
                 });
             }
 
@@ -1309,43 +1430,21 @@
                 }
             });
 
-            // Universal user gesture handler: clicking or tapping ANYWHERE on the page starts music immediately
+            // Universal user gesture handler anywhere on the page
             function handleUserGesture() {
                 if (userExplicitlyPaused) return;
                 initAudio();
                 bgMusic.muted = false;
                 bgMusic.volume = TARGET_VOLUME;
-                const playPromise = bgMusic.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        updateAudioUI(true);
-                        removeInteractionListeners();
-                    }).catch(() => {
-                        // Keep listening until an interaction successfully starts playback
-                    });
-                }
+                bgMusic.play().then(() => {
+                    updateAudioUI(true);
+                }).catch(() => {});
             }
 
-            const gestureEvents = ['click', 'touchstart', 'touchend', 'pointerup', 'keydown'];
+            window.addEventListener('click', handleUserGesture, { capture: true });
+            window.addEventListener('touchend', handleUserGesture, { capture: true });
 
-            function addInteractionListeners() {
-                gestureEvents.forEach(evt => {
-                    window.addEventListener(evt, handleUserGesture, { capture: true, passive: true });
-                });
-            }
-
-            function removeInteractionListeners() {
-                gestureEvents.forEach(evt => {
-                    window.removeEventListener(evt, handleUserGesture, { capture: true });
-                });
-            }
-
-            addInteractionListeners();
-
-            // Default to Ring Mode UI immediately
             updateAudioUI(true);
-
-            // Attempt unmuted playback immediately on page load
             playBackgroundMusic();
 
             // Optional Web Audio Chimes & Fanfare for subtle accent effects
