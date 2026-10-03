@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday, Aqsu • For My Favorite Human 🌸</title>
+    <title>Happy Birthday, Zonii • To My Dearest Cousin 🌸</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Three.js for 3D Dreamy Scene -->
@@ -579,9 +579,9 @@
             top: 1.5rem;
             right: 1.5rem;
             z-index: 40;
-            background: rgba(255, 255, 255, 0.72);
+            background: rgba(255, 255, 255, 0.78);
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(240, 109, 148, 0.25);
+            border: 1.5px solid rgba(240, 109, 148, 0.4);
             width: 44px;
             height: 44px;
             border-radius: 50%;
@@ -593,10 +593,63 @@
             transition: all 0.3s ease;
             box-shadow: 0 6px 18px rgba(217, 79, 126, 0.2), inset 0 1px 1px rgba(255,255,255,0.9);
         }
+        .audio-toggle-btn.playing {
+            border-color: rgba(240, 109, 148, 0.75);
+            animation: ringPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes ringPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(240, 109, 148, 0.5), 0 6px 18px rgba(217, 79, 126, 0.25);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(240, 109, 148, 0), 0 6px 18px rgba(217, 79, 126, 0.25);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(240, 109, 148, 0), 0 6px 18px rgba(217, 79, 126, 0.25);
+            }
+        }
         .audio-toggle-btn:hover {
             background: #ffffff;
             transform: scale(1.1);
-            border-color: rgba(240, 109, 148, 0.5);
+            border-color: rgba(240, 109, 148, 0.8);
+        }
+
+        /* Floating Audio Start Hint Banner */
+        .audio-start-banner {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(16px);
+            border: 1.5px solid rgba(240, 109, 148, 0.55);
+            padding: 0.65rem 1.4rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #b83362;
+            box-shadow: 0 10px 25px -5px rgba(217, 79, 126, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: bannerBounce 2.4s infinite ease-in-out;
+            user-select: none;
+        }
+        .audio-start-banner.hidden {
+            display: none !important;
+        }
+        .audio-start-banner:hover {
+            transform: translateX(-50%) scale(1.05);
+            background: #ffffff;
+            box-shadow: 0 14px 30px -5px rgba(217, 79, 126, 0.45);
+        }
+        @keyframes bannerBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-5px); }
         }
 
         /* Pulse glow animation for centerpiece heart */
@@ -772,8 +825,8 @@
     <div class="foil-heart" style="top: 45%; right: 3%; animation-delay: 2.8s; transform: scale(0.8) rotate(10deg);"></div>
 
     <!-- Audio Toggle Button & Background Music -->
-    <audio id="bg-music" src="./song.mp3" preload="auto" loop playsinline></audio>
-    <button id="audio-toggle" class="audio-toggle-btn" title="Toggle Music" aria-label="Toggle Music">
+    <audio id="bg-music" src="./song.mp3" preload="auto" loop playsinline autoplay></audio>
+    <button id="audio-toggle" class="audio-toggle-btn playing" title="Sound Active (Ring Mode)" aria-label="Sound Active (Ring Mode)">
         <svg id="sound-icon-on" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
         </svg>
@@ -781,6 +834,13 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15zM17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path>
         </svg>
     </button>
+
+    <!-- Floating Audio Start Hint Banner (shows if browser blocks unmuted autoplay until first touch) -->
+    <div id="audio-start-banner" class="audio-start-banner hidden">
+        <span>🎵</span>
+        <span>Tap anywhere to start music</span>
+        <span>✨</span>
+    </div>
 
     <!-- Top Step Indicator Pill -->
     <div class="progress-pill-container">
@@ -808,7 +868,7 @@
                 <div class="step-inner p-1 md:p-2">
                     <div class="anim-child mb-2 mt-1">
                         <div class="luxury-badge">
-                            <span class="sparkle-icon">✦</span> FOR MY FAVORITE HUMAN ✦
+                            <span class="sparkle-icon">✦</span> TO MY DEAREST COUSIN ✦
                         </div>
                     </div>
 
@@ -817,7 +877,7 @@
                     </div>
 
                     <h1 class="anim-child font-serif-luxury text-3xl md:text-4xl lg:text-5xl font-bold text-gradient-dream mb-2 tracking-tight leading-tight">
-                        Happy Birthday, Aqsu.
+                        Happy Birthday, Zonii.
                     </h1>
 
                     <div class="anim-child filigree-divider my-2.5">
@@ -829,7 +889,7 @@
                     </div>
 
                     <p class="anim-child text-[#4a2131] font-normal text-sm md:text-base mb-6 max-w-md mx-auto leading-relaxed">
-                        Some people make life brighter simply by being themselves. Aqsu, this little world was made just for you — every chapter, every little detail, and every wish waiting inside it.
+                        Some people make life brighter simply by being themselves. Zonii, this little world was made just for you — every chapter, every little detail, and every wish waiting inside it.
                     </p>
 
                     <div class="anim-child flex items-center justify-center gap-4">
@@ -851,12 +911,12 @@
                 <div class="step-inner p-1 md:p-2">
                     <div class="anim-child mb-1.5">
                         <div class="luxury-badge">
-                            <span class="sparkle-icon">✦</span> A LETTER FOR AQSU ✦ <span class="sparkle-icon">✦</span>
+                            <span class="sparkle-icon">✦</span> A LETTER FOR MY DEAREST COUSIN ✦ <span class="sparkle-icon">✦</span>
                         </div>
                     </div>
 
                     <h2 class="anim-child font-serif-luxury text-2xl md:text-3xl lg:text-4xl font-bold text-gradient-rose mb-1 mt-1 leading-tight">
-                        Happy Birthday, My Girl. ♡
+                        Happy Birthday, My Dearest Cousin. ♡
                     </h2>
 
                     <div class="anim-child filigree-divider my-2">
@@ -870,39 +930,39 @@
                     <!-- Personal Birthday Letter Box -->
                     <div class="anim-child letter-content-box p-4 md:p-6 max-h-[46vh] md:max-h-[48vh] overflow-y-auto custom-letter-scroll text-center space-y-3.5 my-2.5">
                         <p class="font-editorial text-lg md:text-xl text-[#b83362] font-semibold italic">
-                            Happy Birthday, my girl. ❤️
+                            Happy Birthday to my dearest cousin. ❤️
                         </p>
 
                         <p class="text-[#4a2131] text-sm md:text-[0.95rem] leading-relaxed font-normal">
-                            Allah bless you, and thank you for becoming such a beautiful friend in my life. When I had no one, I used to pray, “Allah, please send me someone who is truly my friend, someone I can call my own.” And then, somehow, He blessed me with you.
+                            Allah bless you always, and thank you for being such a wonderful blessing in my life. Having you not just as a cousin, but as someone who is truly close to my heart, is something I am endlessly grateful for. Growing up and having someone so special to call my own is a true blessing.
                         </p>
 
                         <p class="text-[#4a2131] text-sm md:text-[0.95rem] leading-relaxed font-normal">
-                            Thank you for being there, for being the kind of friend I once prayed for, and for becoming such a precious part of my life.
+                            Thank you for always bringing so much joy, for being the kind of cousin everyone wishes they had, and for being such a cherished part of my life and our family.
                         </p>
 
                         <p class="text-[#4a2131] text-sm md:text-[0.95rem] leading-relaxed font-normal">
-                            My biggest prayer for you is that sadness never takes away the beauty of your smile. May Allah keep opening doors of mercy and blessings for you. May He fill your life with so much happiness that you never run out of reasons to be grateful. May you see more happiness than hardship, more peace than pain, and more beautiful days than difficult ones. 🤍✨
+                            My biggest prayer for you is that sadness never takes away the beauty of your smile. May Allah keep opening doors of mercy, success, and blessings for you. May He fill your life with so much happiness that you never run out of reasons to be grateful. May you see more happiness than hardship, more peace than pain, and more beautiful days than difficult ones. 🤍✨
                         </p>
 
                         <p class="text-[#4a2131] text-sm md:text-[0.95rem] leading-relaxed font-normal">
-                            I pray that our friendship always remains strong and that no distance, time, or circumstance ever takes away the bond we share.
+                            I pray that our bond as cousins always remains unbreakable, and that no distance, time, or circumstance ever changes how close we are.
                         </p>
 
                         <p class="text-[#4a2131] text-sm md:text-[0.95rem] leading-relaxed font-normal">
-                            Sometimes, Aqsu, I feel like you are one of Allah's beautiful gifts to me. And I never want to be ungrateful for a gift this precious. I could never forget the place you hold in my life, even if I lived a thousand lives.
+                            Sometimes, Zonii, I feel like you are one of Allah's most beautiful gifts to our family and to me. And I never want to be ungrateful for someone this precious. I could never forget the special place you hold in my life, even if I lived a thousand lives.
                         </p>
 
                         <p class="text-[#4a2131] text-sm md:text-[0.95rem] leading-relaxed font-normal">
-                            You are one of the most beautiful parts of my life, and I hope you always know how much you mean to me.
+                            You are one of the brightest parts of my life, and I hope you always know how deeply cherished you are.
                         </p>
 
                         <!-- Special Closing Emphasis -->
                         <div class="pt-3 pb-1 border-t border-rose-200/60">
                             <p class="font-serif-luxury text-base md:text-lg font-bold text-gradient-rose leading-relaxed">
-                                I love you so much, jaan. ❤️<br>
-                                <span class="text-sm md:text-base font-semibold text-[#8b3d5b]">You are truly the best friend anyone could ask for.</span><br>
-                                I love you so, so much. 🫶🏻✨
+                                Wishing you all the love and happiness, Zonii! ❤️<br>
+                                <span class="text-sm md:text-base font-semibold text-[#8b3d5b]">You are truly the best cousin anyone could ever ask for.</span><br>
+                                May Allah bless you always with endless joy and smiles. 🫶🏻✨
                             </p>
                         </div>
                     </div>
@@ -910,13 +970,13 @@
                     <div class="anim-child flex items-center justify-center gap-3 mt-2.5">
                         <button id="btn-back-2" class="btn-secondary-luxury">Back</button>
                         <button id="btn-step-2" class="btn-luxury">
-                            <span>See What I Adore &rarr;</span>
+                            <span>What Makes You Special &rarr;</span>
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- ================= STEP 3: What Makes Aqsu Special ================= -->
+            <!-- ================= STEP 3: What Makes Zonii Special ================= -->
             <div id="step3" class="step max-w-xl md:max-w-2xl p-5 md:p-7 text-center">
                 <div class="step-border-glow"></div>
                 <div class="luxury-corner luxury-corner-tl"></div>
@@ -952,7 +1012,7 @@
                                 <h3 class="font-serif-luxury text-base md:text-lg font-bold text-[#b83362]">Your Kindness</h3>
                             </div>
                             <p class="text-[#4a2131] text-xs md:text-sm leading-relaxed font-normal">
-                                Aqsu, you have a way of making people feel seen, heard, and comfortable without even trying. That kind of warmth is rare.
+                                Zonii, you have a way of making people feel seen, heard, and comfortable without even trying. That kind of warmth is rare.
                             </p>
                         </div>
 
@@ -985,7 +1045,7 @@
                                 <h3 class="font-serif-luxury text-base md:text-lg font-bold text-[#b83362]">Your Presence</h3>
                             </div>
                             <p class="text-[#4a2131] text-xs md:text-sm leading-relaxed font-normal">
-                                Some people simply make moments better by being there. Aqsu, you're one of those people.
+                                Every family gathering and moment becomes brighter simply because you're there. Zonii, you bring so much warmth to everyone around you.
                             </p>
                         </div>
                     </div>
@@ -1015,7 +1075,7 @@
                     </div>
 
                     <h2 class="anim-child font-serif-luxury text-2xl md:text-3xl font-bold text-gradient-rose mb-2 mt-1 leading-tight">
-                        For You, Aqsu ♡
+                        For You, Zonii ♡
                     </h2>
 
                     <div class="anim-child filigree-divider my-2">
@@ -1035,7 +1095,7 @@
                     </div>
 
                     <p class="anim-child text-[#4a2131] text-sm md:text-[0.95rem] font-medium leading-relaxed my-3 max-w-md mx-auto">
-                        Aqsu, may Allah bless you with a mahram who knows your worth, understands your heart, and knows how to cherish you. May Allah grant you someone as wonderful as the person you have always imagined. Ameen 💗🫶✨
+                        Zonii, may Allah bless you with a mahram who knows your worth, understands your heart, and knows how to cherish you. May Allah grant you someone as wonderful as the person you have always imagined. Ameen 💗🫶✨
                     </p>
 
                     <div class="anim-child flex items-center justify-center gap-3">
@@ -1063,7 +1123,7 @@
                     </div>
 
                     <h2 class="anim-child font-serif-luxury text-3xl md:text-4xl font-bold text-gradient-rose mb-1 mt-1 leading-tight">
-                        One Last Thing, Aqsu…
+                        One Last Thing, Zonii…
                     </h2>
 
                     <div class="anim-child filigree-divider my-2.5">
@@ -1075,7 +1135,7 @@
                     </div>
 
                     <p class="anim-child text-[#4a2131] text-sm md:text-[0.98rem] font-normal leading-relaxed max-w-md mx-auto mb-3">
-                        Aqsu, I hope you always remember how deeply you are appreciated, how many beautiful moments are still waiting for you, and how much brighter life becomes when you are simply yourself.
+                        Zonii, I hope you always remember how deeply you are appreciated, how many beautiful moments are still waiting for you, and how much brighter life becomes when you are simply yourself.
                     </p>
 
                     <div class="anim-child my-2.5">
@@ -1088,7 +1148,7 @@
                     <div id="final-message-box" class="anim-child my-2.5 min-h-[3.8rem] flex items-center justify-center">
                         <div id="final-wish" class="opacity-0 translate-y-4 transition-all duration-700 final-wish-box px-6 py-3.5 rounded-2xl backdrop-blur-md">
                             <p class="font-serif-luxury text-xl md:text-2xl font-bold text-gradient-rose mb-0.5">
-                                Happy Birthday, Aqsu. ♡
+                                Happy Birthday, Zonii. ♡
                             </p>
                             <p class="text-sm md:text-base text-[#8b3d5b] font-medium">
                                 May this year be unforgettable.
@@ -1119,64 +1179,88 @@
                1. BACKGROUND SOUNDTRACK (song.mp3) & AUDIO SYSTEM
             ---------------------------------------------------- */
             const bgMusic = document.getElementById('bg-music') || new Audio('./song.mp3');
-            bgMusic.src = './song.mp3';
+            if (!bgMusic.src) bgMusic.src = './song.mp3';
             bgMusic.preload = 'auto';
             bgMusic.loop = true;
+            bgMusic.muted = false; // Always UNMUTED by default in Ring Mode
 
-            const TARGET_VOLUME = 0.3; // Comfortable volume level (0.25 - 0.35)
+            const TARGET_VOLUME = 0.8; // Rich, vibrant, audible ring volume
+            bgMusic.volume = TARGET_VOLUME;
             let userExplicitlyPaused = false;
             let fadeTween = null;
 
             const audioToggleBtn = document.getElementById('audio-toggle');
             const soundIconOn = document.getElementById('sound-icon-on');
             const soundIconOff = document.getElementById('sound-icon-off');
+            const audioStartBanner = document.getElementById('audio-start-banner');
+
+            function showAudioBanner() {
+                if (audioStartBanner && !userExplicitlyPaused && bgMusic.paused) {
+                    audioStartBanner.classList.remove('hidden');
+                    gsap.fromTo(audioStartBanner,
+                        { opacity: 0, y: 15 },
+                        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
+                    );
+                }
+            }
+
+            function hideAudioBanner() {
+                if (audioStartBanner && !audioStartBanner.classList.contains('hidden')) {
+                    gsap.to(audioStartBanner, {
+                        opacity: 0,
+                        y: 10,
+                        duration: 0.35,
+                        ease: 'power2.in',
+                        onComplete: () => audioStartBanner.classList.add('hidden')
+                    });
+                }
+            }
 
             function updateAudioUI(isPlaying) {
                 if (isPlaying) {
                     soundIconOn.classList.remove('hidden');
                     soundIconOff.classList.add('hidden');
-                    audioToggleBtn.setAttribute('title', 'Pause Music');
-                    audioToggleBtn.setAttribute('aria-label', 'Pause Music');
-                } else {
+                    audioToggleBtn.classList.add('playing');
+                    audioToggleBtn.setAttribute('title', 'Sound Active (Ring Mode) - Click to Mute');
+                    audioToggleBtn.setAttribute('aria-label', 'Sound Active (Ring Mode) - Click to Mute');
+                    hideAudioBanner();
+                } else if (userExplicitlyPaused) {
                     soundIconOn.classList.add('hidden');
                     soundIconOff.classList.remove('hidden');
-                    audioToggleBtn.setAttribute('title', 'Play Music');
-                    audioToggleBtn.setAttribute('aria-label', 'Play Music');
+                    audioToggleBtn.classList.remove('playing');
+                    audioToggleBtn.setAttribute('title', 'Sound Muted - Click to Play');
+                    audioToggleBtn.setAttribute('aria-label', 'Sound Muted - Click to Play');
+                    hideAudioBanner();
+                } else {
+                    // Waiting for user gesture to unlock sound: keep Ring Mode icon and show prompt
+                    soundIconOn.classList.remove('hidden');
+                    soundIconOff.classList.add('hidden');
+                    audioToggleBtn.classList.add('playing');
+                    audioToggleBtn.setAttribute('title', 'Sound Active (Ring Mode)');
+                    audioToggleBtn.setAttribute('aria-label', 'Sound Active (Ring Mode)');
+                    showAudioBanner();
                 }
             }
 
-            function playBackgroundMusic(fadeIn = true) {
+            function playBackgroundMusic() {
                 if (!bgMusic) return Promise.resolve();
                 userExplicitlyPaused = false;
+                bgMusic.muted = false;
 
                 if (fadeTween) {
                     fadeTween.kill();
                     fadeTween = null;
                 }
 
-                if (fadeIn && bgMusic.paused) {
-                    bgMusic.volume = 0;
-                } else if (!fadeIn) {
-                    bgMusic.volume = TARGET_VOLUME;
-                }
+                bgMusic.volume = TARGET_VOLUME;
 
                 const playPromise = bgMusic.play();
                 if (playPromise !== undefined) {
                     return playPromise.then(() => {
                         updateAudioUI(true);
-                        if (fadeIn) {
-                            fadeTween = gsap.to(bgMusic, {
-                                volume: TARGET_VOLUME,
-                                duration: 1.6,
-                                ease: 'power1.out',
-                                onComplete: () => {
-                                    bgMusic.volume = TARGET_VOLUME;
-                                    fadeTween = null;
-                                }
-                            });
-                        }
+                        removeInteractionListeners();
                     }).catch(() => {
-                        // Silently handle autoplay restriction until first user interaction
+                        // Browser autoplay policy requires user gesture: show hint banner
                         updateAudioUI(false);
                     });
                 }
@@ -1196,7 +1280,8 @@
 
             function toggleBackgroundMusic() {
                 if (bgMusic.paused) {
-                    playBackgroundMusic(true);
+                    userExplicitlyPaused = false;
+                    playBackgroundMusic();
                 } else {
                     pauseBackgroundMusic();
                 }
@@ -1208,35 +1293,60 @@
                 toggleBackgroundMusic();
             });
 
+            if (audioStartBanner) {
+                audioStartBanner.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    initAudio();
+                    playBackgroundMusic();
+                });
+            }
+
             // Keep audio element events and UI strictly synchronized
             bgMusic.addEventListener('play', () => updateAudioUI(true));
             bgMusic.addEventListener('pause', () => {
-                if (bgMusic.paused) {
+                if (userExplicitlyPaused) {
                     updateAudioUI(false);
                 }
             });
 
-            // Handle first user interaction for browsers blocking autoplay
-            function handleFirstInteraction() {
-                removeInteractionListeners();
+            // Universal user gesture handler: clicking or tapping ANYWHERE on the page starts music immediately
+            function handleUserGesture() {
+                if (userExplicitlyPaused) return;
                 initAudio();
-                if (!userExplicitlyPaused && bgMusic.paused) {
-                    playBackgroundMusic(true);
+                bgMusic.muted = false;
+                bgMusic.volume = TARGET_VOLUME;
+                const playPromise = bgMusic.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        updateAudioUI(true);
+                        removeInteractionListeners();
+                    }).catch(() => {
+                        // Keep listening until an interaction successfully starts playback
+                    });
                 }
             }
 
-            function removeInteractionListeners() {
-                ['click', 'touchstart', 'keydown', 'pointerdown'].forEach(event => {
-                    document.removeEventListener(event, handleFirstInteraction, { capture: true });
+            const gestureEvents = ['click', 'touchstart', 'touchend', 'pointerup', 'keydown'];
+
+            function addInteractionListeners() {
+                gestureEvents.forEach(evt => {
+                    window.addEventListener(evt, handleUserGesture, { capture: true, passive: true });
                 });
             }
 
-            ['click', 'touchstart', 'keydown', 'pointerdown'].forEach(event => {
-                document.addEventListener(event, handleFirstInteraction, { capture: true, once: true });
-            });
+            function removeInteractionListeners() {
+                gestureEvents.forEach(evt => {
+                    window.removeEventListener(evt, handleUserGesture, { capture: true });
+                });
+            }
 
-            // Attempt autoplay on page load
-            playBackgroundMusic(true);
+            addInteractionListeners();
+
+            // Default to Ring Mode UI immediately
+            updateAudioUI(true);
+
+            // Attempt unmuted playback immediately on page load
+            playBackgroundMusic();
 
             // Optional Web Audio Chimes & Fanfare for subtle accent effects
             let audioCtx = null;
@@ -1660,6 +1770,11 @@
             function goToStep(stepNumber, direction = 1) {
                 if (stepNumber < 1 || stepNumber > totalSteps) return;
 
+                // Ensure sound is active on navigation
+                if (!userExplicitlyPaused && bgMusic && bgMusic.paused) {
+                    handleUserGesture();
+                }
+
                 const currentEl = document.getElementById(`step${currentStep}`);
                 const nextEl = document.getElementById(`step${stepNumber}`);
 
@@ -1698,7 +1813,10 @@
                 playCrystalChord();
             }
 
-            document.getElementById('btn-step-1').addEventListener('click', () => goToStep(2, 1));
+            document.getElementById('btn-step-1').addEventListener('click', () => {
+                handleUserGesture();
+                goToStep(2, 1);
+            });
             document.getElementById('btn-step-2').addEventListener('click', () => goToStep(3, 1));
             document.getElementById('btn-back-2').addEventListener('click', () => goToStep(1, -1));
 
